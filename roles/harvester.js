@@ -1,4 +1,11 @@
+/**
+ * Handles the behavior of harvester creeps.
+ */
 module.exports = {
+    /**
+     * Executes the harvester creep logic.
+     * @param {Creep} creep - The creep to execute behavior on.
+     */
     run: function (creep) {
         if (creep.store.getFreeCapacity() > 0) {
             // Find nearest energy source
@@ -22,7 +29,3 @@ module.exports = {
                 if (creep.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                     creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
                 }
-            }
-        }
-    }
-};
