@@ -8,30 +8,29 @@ module.exports.visualizeTelemetry = function () {
         return;
     }
 
-    Memory.watchTelemetry.forEach(creepName => {
-        const creep = Game.creeps[creepName];
-        if (!creep) {
-            return; // Skip invalid creep names
-        }
+    const room = Game.rooms[Object.keys(Game.rooms)[0]]; // Get any available room
+    if (!room) return;
 
+    let y = 2; // Start position for table
+    room.visual.text("Telemetry Log", 2, y, { align: 'left', color: '#ffffff', font: 0.8 });
+    y += 1;
+    room.visual.text("Creep", 2, y, { align: 'left', color: '#00ff00', font: 0.7 });
+    room.visual.text("Tick", 10, y, { align: 'left', color: '#00ff00', font: 0.7 });
+    room.visual.text("Event", 16, y, { align: 'left', color: '#00ff00', font: 0.7 });
+    y += 0.5;
+
+    Memory.watchTelemetry.forEach(creepName => {
         const events = telemetry.getTelemetry(creepName, 'intent');
         if (!events || events.length === 0) {
             return;
         }
 
-        // Get the last 10 events
         const recentEvents = events.slice(-10);
-        
-        // Format text output
-        const lines = recentEvents.map(event => {
-            return `${event.tick}: ${event.action} -> ${event.target} [${event.result}]`;
-        });
-
-        // Display above the creep
-        creep.room.visual.text(lines.join('\n'), creep.pos.x + 1, creep.pos.y, {
-            align: 'left',
-            color: '#00ff00',
-            font: 0.5
+        recentEvents.forEach(event => {
+            room.visual.text(creepName, 2, y, { align: 'left', color: '#ffffff', font: 0.5 });
+            room.visual.text(event.tick.toString(), 10, y, { align: 'left', color: '#ffffff', font: 0.5 });
+            room.visual.text(JSON.stringify(event), 16, y, { align: 'left', color: '#ffffff', font: 0.5 });
+            y += 0.5;
         });
     });
 };
