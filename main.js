@@ -1,5 +1,5 @@
-const spawning = require('managers/spawning');
-const harvester = require('roles/harvester');
+const spawning = require('manager-spawning');
+const harvester = require('role-harvester');
 
 /**
  * Main game loop, executed every tick.

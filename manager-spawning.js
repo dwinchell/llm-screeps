@@ -1,4 +1,4 @@
-const roles = require('config/roles');
+const roles = require('config-roles');
 
 /**
  * Manages creep spawning based on configured role limits.
