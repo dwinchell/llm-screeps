@@ -5,6 +5,7 @@ const harvester = require('role-harvester');
 const { logEnergyIncome } = require('utils-logging');
 const harvesterMonitor = require('role-harvester-monitor');
 const creepLifecycle = require('creep-lifecycle');
+const { visualizeTelemetry } = require('telemetry-visualize');
 
 /**
  * Main game loop, executed every tick.
@@ -37,4 +38,7 @@ module.exports.loop = function () {
 
     // Monitor harvester telemetry for anomalies
     harvesterMonitor.monitorTelemetry();
+
+    // Visualize telemetry events
+    visualizeTelemetry()
 };
