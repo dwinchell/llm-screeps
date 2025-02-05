@@ -6,6 +6,7 @@ const { logEnergyIncome } = require('utils-logging');
 const harvesterMonitor = require('role-harvester-monitor');
 const creepLifecycle = require('creep-lifecycle');
 const { visualizeTelemetry } = require('telemetry-visualize');
+require('ext-creep');
 
 /**
  * Main game loop, executed every tick.
