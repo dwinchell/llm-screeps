@@ -13,7 +13,7 @@ module.exports = {
      * @param {string} category - The category of the telemetry data (e.g., "harvester", "general").
      * @param {Object} data - The telemetry data to log.
      */
-    logTelemetry: function (entityName, category, data) {
+    recordTelemetry: function (entityName, category, data) {
         if (!Memory.telemetry[entityName]) {
             Memory.telemetry[entityName] = {};
         }

@@ -18,19 +18,20 @@ module.exports = {
 
             console.log(`[MONITOR] Tracking ${entityName}: ${actions.length} telemetry entries recorded.`);
 
-            // Ensure telemetry data is being captured
-            actions.forEach(action => {
-                console.log(`[DEBUG] ${entityName} - Tick ${action.tick}: ${action.action}`);
-            });
-
             // Detect if a harvester is stuck in an idle state
             let lastActions = actions.slice(-5); // Check the last few actions
             let allIdle = lastActions.every(a => a.action === "heartbeat");
             let hasDeathEvent = telemetry.getTelemetry(entityName, 'lifecycle').some(a => a.action === "death");
-
             if (allIdle && !hasDeathEvent) {
                 console.log(`[ALERT] ${entityName} has been idle for multiple ticks without performing expected actions and has no recorded death.`);
             }
+
+            // Detect if a harvester does not have a transfer target
+            let noTransferTarget = telemetry.getTelemetry(entityName, 'harvester').some(a => a.action === "noTransferTarget");
+            if(noTransferTarget) {
+                console.log(`[ALERT] harvester ${entityName} recently had no transfer target.`);
+            }
+
         }
     }
 };

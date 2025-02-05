@@ -17,7 +17,7 @@ module.exports = {
                     creep.moveTo(source, { visualizePathStyle: { stroke: '#ffaa00' } });
                 }
 
-                telemetry.logTelemetry(creep.name, 'harvester', {
+                telemetry.recordTelemetry(creep.name, 'harvester', {
                     action: result === ERR_NOT_IN_RANGE ? "moveToSource" : "harvest",
                     position: { x: creep.pos.x, y: creep.pos.y },
                     target: source.id
@@ -39,10 +39,16 @@ module.exports = {
                     creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
                 }
 
-                telemetry.logTelemetry(creep.name, 'harvester', {
+                telemetry.recordTelemetry(creep.name, 'harvester', {
                     action: result === ERR_NOT_IN_RANGE ? "moveToTarget" : "transfer",
                     position: { x: creep.pos.x, y: creep.pos.y },
                     target: target.id
+                });
+            }
+            else {
+                telemetry.recordTelemetry(creep.name, 'harvester', {
+                    action: "noTransferTarget",
+                    position: { x: creep.pos.x, y: creep.pos.y },
                 });
             }
         }
