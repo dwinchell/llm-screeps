@@ -22,9 +22,13 @@
       "creep-lifecycle.js"
   ],
   "next_steps": [
-    "Optimize harvester pathing for better efficiency.",
-    "Implement haulers to optimize energy transport.",
-    "Expand telemetry tracking to include more creep roles."
+    "Extend Creep.prototype to record telemetry events for every function call that requres an 'intent'.",
+    "Implement a state machine utility to simplify role implementations",
+    "Implement haulers to optimize energy transport."
+  ],
+  "ideas_backlog": [
+    "Implement a spawning queue",
+    "Optimize creep pathing for better efficiency.",
   ],
   "constraints": [
     "Never use the optional chaining (?.) syntax.",
