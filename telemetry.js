@@ -14,10 +14,12 @@ module.exports = {
      * @param {Object} data - The telemetry event data to record.
      */
     recordTelemetry: function (entityName, category, data) {
+        console.log(`[DEBUG] Recording telemetry: ${entityName}, ${category}, ${JSON.stringify(data)}`);
+    
         if (!Memory.telemetry[entityName] || !Array.isArray(Memory.telemetry[entityName])) {
             Memory.telemetry[entityName] = []; // Ensure it is always an array
         }
-        
+    
         Memory.telemetry[entityName].push({
             tick: Game.time,
             category: category,
