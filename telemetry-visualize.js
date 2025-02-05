@@ -5,7 +5,6 @@ const telemetry = require('telemetry');
 
 
 module.exports.visualizeTelemetry = function () {
-    console.log(`[DEBUG] Running visualizeTelemetry()`);
 
     if (!Memory.watchTelemetry || !Array.isArray(Memory.watchTelemetry)) {
         return;
@@ -18,14 +17,8 @@ module.exports.visualizeTelemetry = function () {
         room.visual.text("TEST RENDER", 10, 10, { align: 'left', color: '#ff0000', font: 1 });
     }
 
-    // DEBUG
-    let y = 2; // Start position for table
-    room.visual.text("Telemetry Log", 2, y, { align: 'left', color: '#ffffff', font: 0.8 });
-    y += 1;
-
     Memory.watchTelemetry.forEach(creepName => {
         const events = telemetry.getTelemetry(creepName);
-        console.log(`[DEBUG] Retrieved telemetry for ${creepName}:`, JSON.stringify(events));
         if (!events || events.length === 0) {
             return;
         }
@@ -46,7 +39,7 @@ module.exports.visualizeTelemetry = function () {
             room.visual.text(event.category || "-", 7, y, { align: 'left', color: '#ffffff', font: 0.5 });
             room.visual.text(event.action, 12, y, { align: 'left', color: '#ffffff', font: 0.5 });
             room.visual.text(event.target, 17, y, { align: 'left', color: '#ffffff', font: 0.5 });
-            room.visual.text(event.result.toString(), 22, y, { align: 'left', color: '#ffffff', font: 0.5 });
+            room.visual.text((event.result !== undefined ? event.result.toString() : "-"), 22, y, { align: 'left', color: '#ffffff', font: 0.5 });
             y += 0.5;
         });
         y += 0.5; // Extra space between different creeps
