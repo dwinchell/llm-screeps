@@ -20,7 +20,9 @@ module.exports = {
             for (let i = 0; i < actions.length; i++) {
                 let entry = actions[i];
                 console.log(`[TEST] ${creepName} at tick ${entry.tick}: ${entry.action} at ` + 
-                    (entry.position ? `${entry.position.x},${entry.position.y}` : "UNKNOWN POSITION") + 
+                    (entry.position && entry.position.x !== undefined && entry.position.y !== undefined 
+                        ? `${entry.position.x},${entry.position.y}` 
+                        : "UNKNOWN POSITION") + 
                     ` targeting ${entry.target ? entry.target : "UNKNOWN TARGET"}`);
                 
                 // Basic validation: Ensure actions occur in expected order
