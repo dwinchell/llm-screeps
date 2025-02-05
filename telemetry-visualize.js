@@ -3,6 +3,7 @@
 
 const telemetry = require('utils-telemetry');
 
+
 module.exports.visualizeTelemetry = function () {
     if (!Memory.watchTelemetry || !Array.isArray(Memory.watchTelemetry)) {
         return;
@@ -24,10 +25,20 @@ module.exports.visualizeTelemetry = function () {
         // Section header for each creep
         room.visual.text(`Creep: ${creepName}`, 2, y, { align: 'left', color: '#00ff00', font: 0.7 });
         y += 0.5;
+        room.visual.text("Tick", 2, y, { align: 'left', color: '#00ff00', font: 0.6 });
+        room.visual.text("Category", 6, y, { align: 'left', color: '#00ff00', font: 0.6 });
+        room.visual.text("Action", 12, y, { align: 'left', color: '#00ff00', font: 0.6 });
+        room.visual.text("Target", 18, y, { align: 'left', color: '#00ff00', font: 0.6 });
+        room.visual.text("Result", 26, y, { align: 'left', color: '#00ff00', font: 0.6 });
+        y += 0.5;
 
         const recentEvents = events.slice(-10);
         recentEvents.forEach(event => {
-            room.visual.text(JSON.stringify(event), 4, y, { align: 'left', color: '#ffffff', font: 0.5 });
+            room.visual.text(event.tick.toString(), 2, y, { align: 'left', color: '#ffffff', font: 0.5 });
+            room.visual.text(event.category || "-", 6, y, { align: 'left', color: '#ffffff', font: 0.5 });
+            room.visual.text(event.action, 12, y, { align: 'left', color: '#ffffff', font: 0.5 });
+            room.visual.text(event.target, 18, y, { align: 'left', color: '#ffffff', font: 0.5 });
+            room.visual.text(event.result.toString(), 26, y, { align: 'left', color: '#ffffff', font: 0.5 });
             y += 0.5;
         });
         y += 0.5; // Extra space between different creeps
