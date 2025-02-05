@@ -41,9 +41,6 @@ function wrapCreepMethod(method) {
                 tick: Game.time
             });
 
-            // DEBUG
-            console.log(`Telemetry logged: ${this.name} -> ${method}`);
-
             return result;
         };
     }
