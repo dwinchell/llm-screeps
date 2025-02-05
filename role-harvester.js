@@ -9,13 +9,6 @@ module.exports = {
      * @param {boolean} isTelemetryActive - Whether telemetry logging should be enabled.
      */
     run: function (creep, isTelemetryActive) {
-        if (!creep || !Game.creeps[creep.name]) {
-            if (isTelemetryActive) {
-                telemetry.logTelemetry(creep.name, 'general', { action: 'death' });
-            }
-            return;
-        }
-
         if (creep.store.getFreeCapacity() > 0) {
             // Find nearest energy source
             let source = creep.pos.findClosestByPath(FIND_SOURCES);
