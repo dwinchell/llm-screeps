@@ -1,55 +1,30 @@
+// role-harvester-monitor.js
+
 const telemetry = require('utils-telemetry');
 
 module.exports = {
     /**
-     * Runs tests on harvester behavior based on stored telemetry data.
+     * Monitors harvester telemetry and detects anomalies.
      */
-    runTests: function () {
-        let success = true;
+    monitorTelemetry: function () {
         let telemetryData = Memory.telemetry && Memory.telemetry.harvester;
 
         if (!telemetryData || Object.keys(telemetryData).length === 0) {
-            console.log("[TEST] No harvester telemetry data available.");
+            console.log("[MONITOR] No harvester telemetry data available.");
             return;
         }
 
         for (let creepName in telemetryData) {
             let actions = telemetry.getTelemetry('harvester', creepName);
-            console.log(`[TEST] Verifying ${creepName}: ${actions.length} actions recorded.`);
+            console.log(`[MONITOR] Tracking ${creepName}: ${actions.length} telemetry entries recorded.`);
 
-            for (let i = 0; i < actions.length; i++) {
-                let entry = actions[i];
-                console.log(`[TEST] ${creepName} at tick ${entry.tick}: ${entry.action} at ` + 
-                    (entry.position && entry.position.x !== undefined && entry.position.y !== undefined 
-                        ? `${entry.position.x},${entry.position.y}` 
-                        : "UNKNOWN POSITION") + 
-                    ` targeting ${entry.target ? entry.target : "UNKNOWN TARGET"}`);
-                
-                // Skip repeated actions of the same type since they are expected
-                if (i > 0) {
-                    let prevEntry = actions[i - 1];
-                    if (entry.action === prevEntry.action) {
-                        continue; // Allow repeated actions (e.g., multiple harvest ticks)
-                    }
-                    
-                    // Validate state transitions
-                    if (prevEntry.action === "harvest" && entry.action !== "moveToTarget" && entry.action !== "transfer") {
-                        console.log(`[TEST ERROR] ${creepName} unexpected transition from harvest to ${entry.action}.`);
-                        success = false;
-                    }
+            // Detect if a harvester is stuck in an idle state
+            let lastActions = actions.slice(-5); // Check the last few actions
+            let allIdle = lastActions.every(a => a.action !== "harvest" && a.action !== "transfer" && a.action !== "moveToSource" && a.action !== "moveToTarget");
 
-                    if (prevEntry.action === "transfer" && entry.action !== "moveToSource" && entry.action !== "harvest") {
-                        console.log(`[TEST ERROR] ${creepName} unexpected transition from transfer to ${entry.action}.`);
-                        success = false;
-                    }
-                }
+            if (allIdle) {
+                console.log(`[ALERT] ${creepName} has been idle for multiple ticks without performing expected actions.`);
             }
-        }
-
-        if (success) {
-            console.log("[TEST] Harvester behavior verified successfully.");
-        } else {
-            console.log("[TEST] Harvester behavior had unexpected transitions.");
         }
     }
 };
