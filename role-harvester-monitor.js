@@ -26,12 +26,21 @@ module.exports = {
                 console.log(`[ALERT] ${entityName} has been idle for multiple ticks without performing expected actions and has no recorded death.`);
             }
 
-            // Detect if a harvester does not have a transfer target
-            let noTransferTarget = telemetry.getTelemetry(entityName, 'harvester').some(a => a.action === "noTransferTarget");
-            if(noTransferTarget) {
-                console.log(`[ALERT] harvester ${entityName} recently had no transfer target.`);
+            // Count consecutive noTransferTarget events without interruption
+            let consecutiveNoTarget = 0;
+            for (let i = actions.length - 1; i >= 0; i--) {
+                if (actions[i].action === "noTransferTarget" || actions[i].action === "heartbeat") {
+                    if (actions[i].action === "noTransferTarget") {
+                        consecutiveNoTarget++;
+                    }
+                } else {
+                    break; // Stop counting if another action intervenes
+                }
             }
 
+            if (consecutiveNoTarget > 0) {
+                console.log(`[ALERT] Harvester ${entityName} has had no transfer target for ${consecutiveNoTarget} consecutive ticks.`);
+            }
         }
     }
 };
