@@ -17,7 +17,7 @@ module.exports.visualizeTelemetry = function () {
     y += 1;
 
     Memory.watchTelemetry.forEach(creepName => {
-        const events = telemetry.getTelemetry(creepName, 'intent');
+        const events = telemetry.getTelemetry(creepName);
         if (!events || events.length === 0) {
             return;
         }

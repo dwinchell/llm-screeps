@@ -13,7 +13,7 @@ module.exports = {
         }
 
         for (let entityName in Memory.telemetry) {
-            let actions = telemetry.getTelemetry(entityName, 'harvester');
+            let actions = telemetry.getTelemetry(entityName);
             if (!actions || actions.length === 0) continue;
 
             // Detect if a harvester is stuck in an idle state

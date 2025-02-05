@@ -1,6 +1,6 @@
-// utils-telemetry.js
+// telemetry.js
 
-const TELEMETRY_WINDOW = 50; // Number of ticks to retain telemetry data
+const TELEMETRY_WINDOW = 50; // Number of ticks to retain recorded telemetry events
 
 if (!Memory.telemetry) {
     Memory.telemetry = {};
@@ -8,46 +8,40 @@ if (!Memory.telemetry) {
 
 module.exports = {
     /**
-     * Logs telemetry data for a given entity and category.
+     * Records a telemetry event for a given entity and category.
      * @param {string} entityName - The name of the entity being tracked (e.g., a creep name).
-     * @param {string} category - The category of the telemetry data (e.g., "harvester", "general").
-     * @param {Object} data - The telemetry data to log.
+     * @param {string} category - The category of the telemetry event (e.g., "harvester", "general").
+     * @param {Object} data - The telemetry event data to record.
      */
     recordTelemetry: function (entityName, category, data) {
         if (!Memory.telemetry[entityName]) {
-            Memory.telemetry[entityName] = {};
+            Memory.telemetry[entityName] = [];
         }
         
-        if (!Memory.telemetry[entityName][category]) {
-            Memory.telemetry[entityName][category] = [];
-        }
-        
-        Memory.telemetry[entityName][category].push({
+        Memory.telemetry[entityName].push({
             tick: Game.time,
+            category: category,
             ...data
         });
         
-        // Remove old entries beyond the configured window
-        if (Memory.telemetry[entityName][category].length > TELEMETRY_WINDOW) {
-            Memory.telemetry[entityName][category].shift();
+        // Remove old telemetry events beyond the configured window
+        if (Memory.telemetry[entityName].length > TELEMETRY_WINDOW) {
+            Memory.telemetry[entityName].shift();
         }
     },
 
     /**
-     * Retrieves telemetry data for a given entity and category.
+     * Retrieves recorded telemetry events for a given entity.
      * @param {string} entityName - The name of the entity.
-     * @param {string} category - The telemetry category.
-     * @returns {Array} - The logged telemetry data.
+     * @returns {Array} - The recorded telemetry events.
      */
-    getTelemetry: function (entityName, category) {
-        return Memory.telemetry[entityName] && Memory.telemetry[entityName][category]
-            ? Memory.telemetry[entityName][category]
-            : [];
+    getTelemetry: function (entityName) {
+        return Memory.telemetry[entityName] ? Memory.telemetry[entityName] : [];
     },
 
     /**
-     * Clears telemetry data for a given entity.
-     * @param {string} entityName - The entity whose telemetry data should be cleared.
+     * Clears recorded telemetry events for a given entity.
+     * @param {string} entityName - The entity whose recorded telemetry events should be cleared.
      */
     clearTelemetry: function (entityName) {
         if (Memory.telemetry[entityName]) {
