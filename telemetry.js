@@ -36,7 +36,8 @@ module.exports = {
      * @returns {Array} - The recorded telemetry events.
      */
     getTelemetry: function (entityName) {
-        return Memory.telemetry[entityName] ? Memory.telemetry[entityName] : [];
+        let telemetryData = Memory.telemetry[entityName];
+        return Array.isArray(telemetryData) ? telemetryData : [];
     },
 
     /**
