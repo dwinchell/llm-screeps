@@ -14,8 +14,8 @@ module.exports = {
      * @param {Object} data - The telemetry event data to record.
      */
     recordTelemetry: function (entityName, category, data) {
-        if (!Memory.telemetry[entityName]) {
-            Memory.telemetry[entityName] = [];
+        if (!Memory.telemetry[entityName] || !Array.isArray(Memory.telemetry[entityName])) {
+            Memory.telemetry[entityName] = []; // Ensure it is always an array
         }
         
         Memory.telemetry[entityName].push({
@@ -23,13 +23,13 @@ module.exports = {
             category: category,
             ...data
         });
-        
+    
         // Remove old telemetry events beyond the configured window
         if (Memory.telemetry[entityName].length > TELEMETRY_WINDOW) {
             Memory.telemetry[entityName].shift();
         }
     },
-
+    
     /**
      * Retrieves recorded telemetry events for a given entity.
      * @param {string} entityName - The name of the entity.
