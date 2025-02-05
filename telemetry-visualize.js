@@ -14,10 +14,6 @@ module.exports.visualizeTelemetry = function () {
     let y = 2; // Start position for table
     room.visual.text("Telemetry Log", 2, y, { align: 'left', color: '#ffffff', font: 0.8 });
     y += 1;
-    room.visual.text("Creep", 2, y, { align: 'left', color: '#00ff00', font: 0.7 });
-    room.visual.text("Tick", 10, y, { align: 'left', color: '#00ff00', font: 0.7 });
-    room.visual.text("Event", 16, y, { align: 'left', color: '#00ff00', font: 0.7 });
-    y += 0.5;
 
     Memory.watchTelemetry.forEach(creepName => {
         const events = telemetry.getTelemetry(creepName, 'intent');
@@ -25,13 +21,16 @@ module.exports.visualizeTelemetry = function () {
             return;
         }
 
+        // Section header for each creep
+        room.visual.text(`Creep: ${creepName}`, 2, y, { align: 'left', color: '#00ff00', font: 0.7 });
+        y += 0.5;
+
         const recentEvents = events.slice(-10);
         recentEvents.forEach(event => {
-            room.visual.text(creepName, 2, y, { align: 'left', color: '#ffffff', font: 0.5 });
-            room.visual.text(event.tick.toString(), 10, y, { align: 'left', color: '#ffffff', font: 0.5 });
-            room.visual.text(JSON.stringify(event), 16, y, { align: 'left', color: '#ffffff', font: 0.5 });
+            room.visual.text(JSON.stringify(event), 4, y, { align: 'left', color: '#ffffff', font: 0.5 });
             y += 0.5;
         });
+        y += 0.5; // Extra space between different creeps
     });
 };
 
