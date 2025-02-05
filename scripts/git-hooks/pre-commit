@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# Ensure the environment variable is set
+if [ -z "$SCREEPS_LOCAL_PATH" ]; then
+    echo "Warning: SCREEPS_LOCAL_PATH is not set. Skipping file copy."
+    exit 0  # Exit successfully without error
+fi
+
+echo "Running pre-commit hook: Copying JS files to Screeps local scripts directory..."
+
+# Copy only JavaScript files from the root directory, ignoring subdirectories
+find . -maxdepth 1 -type f -name "*.js" -exec cp {} "$SCREEPS_LOCAL_PATH" \;
+
+echo "Copy complete!"
