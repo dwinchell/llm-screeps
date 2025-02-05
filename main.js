@@ -6,6 +6,7 @@ const { logEnergyIncome } = require('utils-logging');
 const harvesterMonitor = require('role-harvester-monitor');
 const { recordLifecycleTelemetry } = require('telemetry-lifecycle');
 const { visualizeTelemetry } = require('telemetry-visualize');
+const { visualizeAnomalies } = require('anomaly-visualize');
 require('ext-creep');
 
 /**
