@@ -6,9 +6,8 @@ module.exports = {
     /**
      * Runs harvester behavior and logs telemetry data.
      * @param {Creep} creep - The creep to execute behavior on.
-     * @param {boolean} isTelemetryActive - Whether telemetry logging should be enabled.
      */
-    run: function (creep, isTelemetryActive) {
+    run: function (creep) {
         if (creep.store.getFreeCapacity() > 0) {
             // Find nearest energy source
             let source = creep.pos.findClosestByPath(FIND_SOURCES);
@@ -18,13 +17,11 @@ module.exports = {
                     creep.moveTo(source, { visualizePathStyle: { stroke: '#ffaa00' } });
                 }
 
-                if (isTelemetryActive) {
-                    telemetry.logTelemetry(creep.name, 'harvester', {
-                        action: result === ERR_NOT_IN_RANGE ? "moveToSource" : "harvest",
-                        position: { x: creep.pos.x, y: creep.pos.y },
-                        target: source.id
-                    });
-                }
+                telemetry.logTelemetry(creep.name, 'harvester', {
+                    action: result === ERR_NOT_IN_RANGE ? "moveToSource" : "harvest",
+                    position: { x: creep.pos.x, y: creep.pos.y },
+                    target: source.id
+                });
             }
         } else {
             // Deliver energy to spawn/extensions
@@ -42,13 +39,11 @@ module.exports = {
                     creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
                 }
 
-                if (isTelemetryActive) {
-                    telemetry.logTelemetry(creep.name, 'harvester', {
-                        action: result === ERR_NOT_IN_RANGE ? "moveToTarget" : "transfer",
-                        position: { x: creep.pos.x, y: creep.pos.y },
-                        target: target.id
-                    });
-                }
+                telemetry.logTelemetry(creep.name, 'harvester', {
+                    action: result === ERR_NOT_IN_RANGE ? "moveToTarget" : "transfer",
+                    position: { x: creep.pos.x, y: creep.pos.y },
+                    target: target.id
+                });
             }
         }
     }
