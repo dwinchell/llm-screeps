@@ -16,11 +16,11 @@ module.exports = {
                 if (result === ERR_NOT_IN_RANGE) {
                     creep.moveTo(source, { visualizePathStyle: { stroke: '#ffaa00' } });
                 }
-
+            }
+            else {
                 telemetry.recordTelemetry(creep.name, 'harvester', {
-                    action: result === ERR_NOT_IN_RANGE ? "moveToSource" : "harvest",
+                    action: "noHarvestTarget",
                     position: { x: creep.pos.x, y: creep.pos.y },
-                    target: source.id
                 });
             }
         } else {
@@ -38,12 +38,6 @@ module.exports = {
                 if (result === ERR_NOT_IN_RANGE) {
                     creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
                 }
-
-                telemetry.recordTelemetry(creep.name, 'harvester', {
-                    action: result === ERR_NOT_IN_RANGE ? "moveToTarget" : "transfer",
-                    position: { x: creep.pos.x, y: creep.pos.y },
-                    target: target.id
-                });
             }
             else {
                 telemetry.recordTelemetry(creep.name, 'harvester', {
