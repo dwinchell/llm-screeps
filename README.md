@@ -13,31 +13,6 @@ This project is a **modular, LLM-friendly Screeps bot** built from the ground up
 - **Scalability** – Designed to expand efficiently as the game progresses.
 - **Readable and Documented** – Code is well-commented to facilitate AI and human collaboration.
 
-## Installation
-
-1. Clone the repository:
-
-```bash
-   git clone https://github.com/your-username/screeps-llm-bot.git
-   cd screeps-llm-bot
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Configure your Screeps token:
-```bash
-echo 'YOUR_SCREEPS_TOKEN' > .screeps-token
-npm run push
-```
-
-4. Push to Screeps:
-```bash
-npm run push
-```
-
 ## Project Structure
 📂 src/
  ├── 📂 roles/            # Creep role logic (harvester, builder, etc.)
@@ -47,13 +22,17 @@ npm run push
  ├── README.md            # Project documentation
  ├── package.json         # Dependencies and scripts
 
-Development Guidelines
-Code Style
+## Development Guidelines
+
+### Code Style
+
 Follow a consistent, modular structure.
 Keep function and variable names clear and descriptive.
 Use JSDoc-style comments where necessary.
 Minimize global state to make it easier for AI to reason about.
-Working with LLMs
+
+### Working with LLMs
+
 Describe the intent of a function before writing it. This helps AI tools generate better code.
 
 Write concise, modular functions. LLMs perform better when working with smaller, well-defined logic.
@@ -63,6 +42,7 @@ Use structured prompts when asking for code modifications. Example:
 "Refactor the harvester role to prioritize nearest energy sources and implement a fallback if none are available."
 
 ## Roadmap
+
  Implement basic creep roles (harvester, builder, upgrader)
  Optimize CPU usage
  Introduce defensive logic
@@ -70,4 +50,5 @@ Use structured prompts when asking for code modifications. Example:
  Fine-tune LLM interaction strategies
 
 ## License
-MIT License. See LICENSE for details.
+
+Apache 2.0 License. See LICENSE for details.
