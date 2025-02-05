@@ -57,6 +57,11 @@ The bot employs a **continuous telemetry system** to monitor and analyze creep b
 
 This system ensures a **structured, real-time monitoring approach**, optimizing efficiency and detecting off-nominal behavior dynamically.
 
+### Set up Git Hooks
+```bash
+git config core.hooksPath scripts/git-hooks
+chmod +x scripts/git-hooks/pre-commit
+```
 
 ## Development Guidelines
 
