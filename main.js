@@ -4,9 +4,11 @@ const spawning = require('manager-spawning');
 const harvester = require('role-harvester');
 const { logEnergyIncome } = require('utils-logging');
 const harvesterMonitor = require('role-harvester-monitor');
+const creepLifecycle = require('creep-lifecycle');
 
 /**
  * Main game loop, executed every tick.
+ * - Tracks lifecycle events like heartbeat and deaths.
  * - Runs all creeps based on their roles.
  * - Handles spawning logic.
  * - Logs energy income.
@@ -14,6 +16,9 @@ const harvesterMonitor = require('role-harvester-monitor');
  */
 module.exports.loop = function () {
     console.log(`\n========== TICK ${Game.time} ==========`);
+
+    // Track lifecycle events like heartbeat and deaths
+    creepLifecycle.trackLifecycle();
 
     // Run creep logic
     for (let name in Game.creeps) {
