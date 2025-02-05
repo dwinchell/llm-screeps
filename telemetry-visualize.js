@@ -1,7 +1,7 @@
 // telemetry-visualize.js
 // Displays the last 10 telemetry events for creeps listed in Memory.watchTelemetry
 
-const telemetry = require('utils-telemetry');
+const telemetry = require('telemetry');
 
 
 module.exports.visualizeTelemetry = function () {

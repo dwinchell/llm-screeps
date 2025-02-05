@@ -1,7 +1,7 @@
 // creep-intents.js
 // Wraps Creep.prototype methods to record telemetry events
 
-const telemetry = require('utils-telemetry');
+const telemetry = require('telemetry');
 
 const INTENT_METHODS = [
     'harvest', 'transfer', 'withdraw', 'pickup', 'drop',

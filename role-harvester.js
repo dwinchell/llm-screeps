@@ -1,6 +1,6 @@
 // role-harvester.js
 
-const telemetry = require('utils-telemetry');
+const telemetry = require('telemetry');
 
 module.exports = {
     /**

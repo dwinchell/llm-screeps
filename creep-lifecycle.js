@@ -1,6 +1,6 @@
 // creep-lifecycle.js
 
-const telemetry = require('utils-telemetry');
+const telemetry = require('telemetry');
 
 const TELEMETRY_RETENTION_TICKS = 1; // Time before dead creep telemetry is removed
 
