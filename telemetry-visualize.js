@@ -14,12 +14,18 @@ module.exports.visualizeTelemetry = function () {
     const room = Game.rooms[Object.keys(Game.rooms)[0]]; // Get any available room
     if (!room) return;
 
+    if (room) {
+        room.visual.text("TEST RENDER", 10, 10, { align: 'left', color: '#ff0000', font: 1 });
+    }
+
+    // DEBUG
     let y = 2; // Start position for table
     room.visual.text("Telemetry Log", 2, y, { align: 'left', color: '#ffffff', font: 0.8 });
     y += 1;
 
     Memory.watchTelemetry.forEach(creepName => {
         const events = telemetry.getTelemetry(creepName);
+        console.log(`[DEBUG] Retrieved telemetry for ${creepName}:`, JSON.stringify(events));
         if (!events || events.length === 0) {
             return;
         }
