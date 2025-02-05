@@ -1,13 +1,16 @@
+// main.js
+
 const spawning = require('manager-spawning');
 const harvester = require('role-harvester');
 const { logEnergyIncome } = require('utils-logging');
-const harvesterTest = require('role-harvester-test');
+const harvesterMonitor = require('role-harvester-monitor');
 
 /**
  * Main game loop, executed every tick.
  * - Runs all creeps based on their roles.
  * - Handles spawning logic.
  * - Logs energy income.
+ * - Monitors telemetry and detects anomalies.
  */
 module.exports.loop = function () {
     console.log(`\n========== TICK ${Game.time} ==========`);
@@ -19,13 +22,14 @@ module.exports.loop = function () {
         Memory.testCreepName = null; // Default to no specific creep being tracked
     }
 
+    const isTelemetryActive = !!Memory.testCreepName;
+
     // Run creep logic
     for (let name in Game.creeps) {
         let creep = Game.creeps[name];
 
         if (creep.memory.role === 'harvester') {
-            const isTestMode = name === Memory.testCreepName; // Enable test mode only for the selected creep
-            harvester.run(creep, isTestMode);
+            harvester.run(creep, isTelemetryActive && name === Memory.testCreepName);
         }
     }
 
@@ -35,6 +39,6 @@ module.exports.loop = function () {
     // Log energy income
     logEnergyIncome();
 
-    // Run harvester tests
-    harvesterTest.runTests();
+    // Monitor harvester telemetry for anomalies
+    harvesterMonitor.monitorTelemetry();
 };
