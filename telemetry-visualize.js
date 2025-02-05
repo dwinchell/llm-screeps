@@ -5,6 +5,8 @@ const telemetry = require('telemetry');
 
 
 module.exports.visualizeTelemetry = function () {
+    console.log(`[DEBUG] Running visualizeTelemetry()`);
+
     if (!Memory.watchTelemetry || !Array.isArray(Memory.watchTelemetry)) {
         return;
     }
