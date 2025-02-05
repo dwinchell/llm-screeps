@@ -1,0 +1,23 @@
+{
+  "name": "screeps-llm-bot",
+  "version": "1.0.0",
+  "description": "A Screeps bot designed to be written and maintained using an LLM.",
+  "main": "src/main.js",
+  "scripts": {
+    "push": "screeps upload",
+    "lint": "eslint . --ext .js",
+    "test": "echo \"No tests specified\" && exit 0",
+    "format": "prettier --write '**/*.js'"
+  },
+  "dependencies": {
+    "screeps": "^4.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "license": "Apache-2.0"
+}
