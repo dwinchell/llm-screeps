@@ -26,19 +26,19 @@ module.exports.visualizeTelemetry = function () {
         room.visual.text(`Creep: ${creepName}`, 2, y, { align: 'left', color: '#00ff00', font: 0.7 });
         y += 0.5;
         room.visual.text("Tick", 2, y, { align: 'left', color: '#00ff00', font: 0.6 });
-        room.visual.text("Category", 6, y, { align: 'left', color: '#00ff00', font: 0.6 });
-        room.visual.text("Action", 12, y, { align: 'left', color: '#00ff00', font: 0.6 });
-        room.visual.text("Target", 18, y, { align: 'left', color: '#00ff00', font: 0.6 });
-        room.visual.text("Result", 26, y, { align: 'left', color: '#00ff00', font: 0.6 });
+        room.visual.text("Cat", 7, y, { align: 'left', color: '#00ff00', font: 0.6 });
+        room.visual.text("Act", 12, y, { align: 'left', color: '#00ff00', font: 0.6 });
+        room.visual.text("Tgt", 17, y, { align: 'left', color: '#00ff00', font: 0.6 });
+        room.visual.text("Res", 22, y, { align: 'left', color: '#00ff00', font: 0.6 });
         y += 0.5;
 
-        const recentEvents = events.slice(-10);
+        const recentEvents = events.slice(-10).reverse(); // Reverse to show newest first
         recentEvents.forEach(event => {
             room.visual.text(event.tick.toString(), 2, y, { align: 'left', color: '#ffffff', font: 0.5 });
-            room.visual.text(event.category || "-", 6, y, { align: 'left', color: '#ffffff', font: 0.5 });
+            room.visual.text(event.category || "-", 7, y, { align: 'left', color: '#ffffff', font: 0.5 });
             room.visual.text(event.action, 12, y, { align: 'left', color: '#ffffff', font: 0.5 });
-            room.visual.text(event.target, 18, y, { align: 'left', color: '#ffffff', font: 0.5 });
-            room.visual.text(event.result.toString(), 26, y, { align: 'left', color: '#ffffff', font: 0.5 });
+            room.visual.text(event.target, 17, y, { align: 'left', color: '#ffffff', font: 0.5 });
+            room.visual.text(event.result.toString(), 22, y, { align: 'left', color: '#ffffff', font: 0.5 });
             y += 0.5;
         });
         y += 0.5; // Extra space between different creeps
