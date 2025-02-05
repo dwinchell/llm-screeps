@@ -28,7 +28,7 @@
   ],
   "ideas_backlog": [
     "Implement a spawning queue",
-    "Optimize creep pathing for better efficiency.",
+    "Optimize creep pathing for better efficiency."
   ],
   "implementationConstraints": [
     "Never use the optional chaining (?.) syntax.",
