@@ -25,15 +25,20 @@ module.exports = {
                         : "UNKNOWN POSITION") + 
                     ` targeting ${entry.target ? entry.target : "UNKNOWN TARGET"}`);
                 
-                // Basic validation: Ensure actions occur in expected order
+                // Skip repeated actions of the same type since they are expected
                 if (i > 0) {
-                    let prevAction = actions[i - 1].action;
-                    if (prevAction === "harvest" && entry.action !== "moveToTarget" && entry.action !== "transfer") {
+                    let prevEntry = actions[i - 1];
+                    if (entry.action === prevEntry.action) {
+                        continue; // Allow repeated actions (e.g., multiple harvest ticks)
+                    }
+                    
+                    // Validate state transitions
+                    if (prevEntry.action === "harvest" && entry.action !== "moveToTarget" && entry.action !== "transfer") {
                         console.log(`[TEST ERROR] ${creepName} unexpected transition from harvest to ${entry.action}.`);
                         success = false;
                     }
 
-                    if (prevAction === "transfer" && entry.action !== "moveToSource" && entry.action !== "harvest") {
+                    if (prevEntry.action === "transfer" && entry.action !== "moveToSource" && entry.action !== "harvest") {
                         console.log(`[TEST ERROR] ${creepName} unexpected transition from transfer to ${entry.action}.`);
                         success = false;
                     }

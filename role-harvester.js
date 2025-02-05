@@ -1,14 +1,14 @@
 const telemetry = require('utils-telemetry');
-const TEST_MODE = true; // Toggle test mode
 
 module.exports = {
     /**
      * Executes the harvester creep logic.
      * @param {Creep} creep - The creep to execute behavior on.
+     * @param {boolean} isTestMode - Whether telemetry logging should be enabled.
      */
-    run: function (creep) {
-        if (TEST_MODE) {
-            telemetry.logTelemetry('harvester', creep.name, { action: 'starting', tick: Game.time });
+    run: function (creep, isTestMode) {
+        if (isTestMode) {
+            telemetry.logTelemetry('harvester', creep.name, { action: 'starting' });
         }
 
         if (creep.store.getFreeCapacity() > 0) {
@@ -20,12 +20,11 @@ module.exports = {
                     creep.moveTo(source, { visualizePathStyle: { stroke: '#ffaa00' } });
                 }
 
-                if (TEST_MODE) {
+                if (isTestMode) {
                     telemetry.logTelemetry('harvester', creep.name, {
-                        tick: Game.time,
                         action: result === ERR_NOT_IN_RANGE ? "moveToSource" : "harvest",
-                        position: creep.pos ? { x: creep.pos.x, y: creep.pos.y } : null, // Ensure position is structured properly
-                        target: source ? source.id : null
+                        position: { x: creep.pos.x, y: creep.pos.y }, // Ensure position is always defined
+                        target: source.id
                     });
                 }
             }
@@ -45,12 +44,11 @@ module.exports = {
                     creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
                 }
 
-                if (TEST_MODE) {
+                if (isTestMode) {
                     telemetry.logTelemetry('harvester', creep.name, {
-                        tick: Game.time,
                         action: result === ERR_NOT_IN_RANGE ? "moveToTarget" : "transfer",
-                        position: creep.pos ? { x: creep.pos.x, y: creep.pos.y } : null, // Ensure position is structured properly
-                        target: target ? target.id : null
+                        position: { x: creep.pos.x, y: creep.pos.y }, // Ensure position is always defined
+                        target: target.id
                     });
                 }                
             }
