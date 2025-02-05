@@ -1,4 +1,0 @@
- // In the Screeps client console:
-    // Memory.testCreepName = "harvester123"; // Test this creep
-    // Memory.testCreepName = null; // Don't test any
-   
