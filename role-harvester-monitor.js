@@ -14,9 +14,14 @@ module.exports = {
 
         for (let entityName in Memory.telemetry) {
             let actions = telemetry.getTelemetry(entityName, 'harvester');
-            if (actions.length === 0) continue;
+            if (!actions || actions.length === 0) continue;
 
             console.log(`[MONITOR] Tracking ${entityName}: ${actions.length} telemetry entries recorded.`);
+
+            // Ensure telemetry data is being captured
+            actions.forEach(action => {
+                console.log(`[DEBUG] ${entityName} - Tick ${action.tick}: ${action.action}`);
+            });
 
             // Detect if a harvester is stuck in an idle state
             let lastActions = actions.slice(-5); // Check the last few actions

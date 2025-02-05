@@ -15,21 +15,12 @@ const harvesterMonitor = require('role-harvester-monitor');
 module.exports.loop = function () {
     console.log(`\n========== TICK ${Game.time} ==========`);
 
-    // In the Screeps client console:
-    // Memory.testCreepName = "harvester123"; // Test this creep
-    // Memory.testCreepName = null; // Don't test any
-    if (!Memory.testCreepName) {
-        Memory.testCreepName = null; // Default to no specific creep being tracked
-    }
-
-    const isTelemetryActive = !!Memory.testCreepName;
-
     // Run creep logic
     for (let name in Game.creeps) {
         let creep = Game.creeps[name];
 
         if (creep.memory.role === 'harvester') {
-            harvester.run(creep, isTelemetryActive && name === Memory.testCreepName);
+            harvester.run(creep);
         }
     }
 
