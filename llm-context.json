@@ -30,8 +30,12 @@
     "Implement a spawning queue",
     "Optimize creep pathing for better efficiency.",
   ],
-  "constraints": [
+  "implementationConstraints": [
     "Never use the optional chaining (?.) syntax.",
     "Ensure telemetry data is structured for easy retrieval and cleanup."
+  ],
+  "designDecisions": [
+    "Every role will record at least one telemetry event per tick, even if it is an idle event, or emitted by calling another module",
+    "Haulers will use one move part"
   ]
 }
