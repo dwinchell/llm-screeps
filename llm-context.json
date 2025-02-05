@@ -21,5 +21,8 @@
   "next_steps": [
     "Implement test mode to verify harvester behavior.",
     "Introduce haulers to optimize energy transport."
+  ],
+  "constraints": [
+    "Never use the optional chaining (?.) syntax."
   ]
 }
