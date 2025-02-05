@@ -5,7 +5,6 @@ const telemetry = require('telemetry');
 
 
 module.exports.visualizeTelemetry = function () {
-    console.log(`[DEBUG] Running visualizeTelemetry()`);
 
     if (!Memory.watchTelemetry || !Array.isArray(Memory.watchTelemetry)) {
         return;
@@ -20,7 +19,6 @@ module.exports.visualizeTelemetry = function () {
 
     Memory.watchTelemetry.forEach(creepName => {
         const events = telemetry.getTelemetry(creepName);
-        console.log(`[DEBUG] Retrieved telemetry for ${creepName}:`, JSON.stringify(events));
         if (!events || events.length === 0) {
             return;
         }
