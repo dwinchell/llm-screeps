@@ -7,8 +7,9 @@
     "Basic spawning and harvesting implemented.",
     "Harvester creeps collect energy and deposit into spawn/extensions.",
     "Energy income per tick logging implemented in main.js.",
-    "Test mode for verifying harvester behavior implemented.",
-    "Telemetry system implemented with automatic cleanup after 50 ticks."
+    "Telemetry system implemented with automatic Memory cleanup.",
+    "Creep lifecycle tracking added, including heartbeat and death detection.",
+    "Harvester monitoring enhanced to track idle states and missing transfer targets."
   ],
   "most_important_files": [
       "main.js",
@@ -16,13 +17,17 @@
       "config-roles.js",
       "utils-logging.js",
       "role-harvester.js",
-      "utils-telemetry.js"
+      "role-harvester-monitor.js",
+      "utils-telemetry.js",
+      "creep-lifecycle.js"
   ],
   "next_steps": [
-    "Implement test mode to verify harvester behavior.",
-    "Introduce haulers to optimize energy transport."
+    "Optimize harvester pathing for better efficiency.",
+    "Implement haulers to optimize energy transport.",
+    "Expand telemetry tracking to include more creep roles."
   ],
   "constraints": [
-    "Never use the optional chaining (?.) syntax."
+    "Never use the optional chaining (?.) syntax.",
+    "Ensure telemetry data is structured for easy retrieval and cleanup."
   ]
 }
