@@ -1,22 +1,21 @@
 {
-    "bot_name": "llm-screeps",
-    "goal": "Economy-focused bot minimizing ticks to RCL.",
-    "file_structure": "Flat, prefixed filenames (e.g., manager-spawning.js, role-harvester.js). No subdirectories due to server limitations.",
-    "test_strategy": "Controlled tests by instructing the bot and verifying behavior in a high tick-rate local Screeps server.",
-    "current_progress": [
-      "Basic spawning and harvesting implemented.",
-      "Harvester creeps collect energy and deposit into spawn/extensions."
-    ],
-    "most_important_files": [
-        "main.js",
-        "manager-spawning.js",
-        "config-roles.js",
-        "utils-logging.js"
-    ],
-    "next_steps": [
-      "Implement test mode to verify harvester behavior.",
-      "Add logging for energy income per tick.",
-      "Introduce haulers to optimize energy transport."
-    ]
-  }
-  
+  "bot_name": "llm-screeps",
+  "goal": "Economy-focused bot minimizing ticks to RCL.",
+  "file_structure": "Flat, prefixed filenames (e.g., manager-spawning.js, role-harvester.js). No subdirectories due to server limitations.",
+  "test_strategy": "Controlled tests by instructing the bot and verifying behavior in a high tick-rate local Screeps server.",
+  "current_progress": [
+    "Basic spawning and harvesting implemented.",
+    "Harvester creeps collect energy and deposit into spawn/extensions.",
+    "Energy income per tick logging implemented in main.js."
+  ],
+  "most_important_files": [
+      "main.js",
+      "manager-spawning.js",
+      "config-roles.js",
+      "utils-logging.js"
+  ],
+  "next_steps": [
+    "Implement test mode to verify harvester behavior.",
+    "Introduce haulers to optimize energy transport."
+  ]
+}
