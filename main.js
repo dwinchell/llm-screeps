@@ -1,6 +1,7 @@
 const spawning = require('manager-spawning');
 const harvester = require('role-harvester');
 const { logEnergyIncome } = require('utils-logging'); // Import the function
+const harvesterTest = require('role-harvester-test');
 
 /**
  * Main game loop, executed every tick.
@@ -23,4 +24,6 @@ module.exports.loop = function () {
 
     // Log energy income
     logEnergyIncome();
+
+    harvesterTest.runTests();
 };

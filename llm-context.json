@@ -6,13 +6,17 @@
   "current_progress": [
     "Basic spawning and harvesting implemented.",
     "Harvester creeps collect energy and deposit into spawn/extensions.",
-    "Energy income per tick logging implemented in main.js."
+    "Energy income per tick logging implemented in main.js.",
+    "Test mode for verifying harvester behavior implemented.",
+    "Telemetry system implemented with automatic cleanup after 50 ticks."
   ],
   "most_important_files": [
       "main.js",
       "manager-spawning.js",
       "config-roles.js",
-      "utils-logging.js"
+      "utils-logging.js",
+      "role-harvester.js",
+      "utils-telemetry.js"
   ],
   "next_steps": [
     "Implement test mode to verify harvester behavior.",
