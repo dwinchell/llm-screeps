@@ -1,10 +1,12 @@
 const spawning = require('manager-spawning');
 const harvester = require('role-harvester');
+const { logEnergyIncome } = require('utils-logging'); // Import the function
 
 /**
  * Main game loop, executed every tick.
  * - Runs all creeps based on their roles.
  * - Handles spawning logic.
+ * - Logs energy income.
  */
 module.exports.loop = function () {
     // Run creep logic
@@ -18,4 +20,7 @@ module.exports.loop = function () {
 
     // Manage spawning
     spawning.run();
+
+    // Log energy income
+    logEnergyIncome();
 };
